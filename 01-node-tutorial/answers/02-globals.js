@@ -17,7 +17,7 @@
 
 // TO RUN THIS FILE:
 // export MY_VAR='Hi there!'
-// node globals.js
+// node 02-globals.js
 
 // Print the value of __dirname
 console.log("__dirname:", __dirname);
@@ -31,3 +31,6 @@ console.log("process.env.USER:", process.env.USER);
 // Print the value of __filename
 console.log("__filename:", __filename);
 
+setInterval(() => {
+  console.log("Hello World!");
+}, 1000);
