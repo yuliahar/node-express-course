@@ -25,6 +25,27 @@ app.get('/api/v1/products/:productID', (req, res) => {
   }
 });
 
+app.get('/api/v1/query', (req, res) => {
+  const { search, limit } = req.query;
+  let sortedProducts = [...products];
+
+  if (search) {
+    sortedProducts = sortedProducts.filter((product) => product.name.startsWith(search));
+  }
+
+  if (limit && Number(limit) > 0) {
+    sortedProducts = sortedProducts.slice(0, Number(limit));
+  } else {
+    return res.json({ success: true, message: "Please enter a limit number greater than 0." });
+  }
+
+  if (sortedProducts.length < 1) {
+    return res.json({ success: true, message: "No products matched your search." });
+  }
+
+  res.json(sortedProducts);
+});
+
 app.all('*', (req, res) => {
   res.status(404).send('<h1>Page not found</h1>');
 });
