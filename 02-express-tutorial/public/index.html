@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Code the Dream - Lesson 3: Introduction to Express</h1>
+  <button id="fetchButton">Fetch Products</button>
+  <div id="productList"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const fetchButton = document.getElementById("fetchButton");
+      const productList = document.getElementById("productList");
+
+      fetchButton.addEventListener("click", async () => {
+        try {
+          const response = await fetch("/api/v1/products");
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const data = await response.json();
+          productList.innerHTML = "";
+
+          data.forEach((product) => {
+            const productDiv = document.createElement("div");
+            productDiv.innerHTML = `
+              <h2 style="color:magenta">${product.name}</h2>
+              <img src="${product.image}" alt="${product.name}" width="200">
+              <p>Price: $${product.price}</p>
+              <p>${product.desc}</p>
+              <hr/>
+            `;
+            productList.appendChild(productDiv);
+          });
+
+        } catch (error) {
+          console.error("Fetch Error:", error);
+          productList.innerHTML = "Failed to fetch data.";
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

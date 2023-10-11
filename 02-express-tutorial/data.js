@@ -31,6 +31,62 @@ const products = [
     price: 9.99,
     desc: `I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian.`,
   },
+  {
+    id: 5,
+    name: "wooden chair",
+    image: "https://dl.airtable.com/.attachments/sample-image-5.jpg",
+    price: 19.99,
+    desc: "I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian."
+  },
+  {
+    id: 6,
+    name: "dining table",
+    image: "https://dl.airtable.com/.attachments/sample-image-6.jpg",
+    price: 59.95,
+    desc: "I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian."
+  },
+  {
+    id: 7,
+    name: "bookshelf",
+    image: "https://dl.airtable.com/.attachments/sample-image-7.jpg",
+    price: 45.00,
+    desc: "I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian."
+  },
+  {
+    id: 8,
+    name: "coffee table",
+    image: "https://dl.airtable.com/.attachments/sample-image-8.jpg",
+    price: 25.50,
+    desc: "I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian."
+  },
+  {
+    id: 9,
+    name: 'aluminum chair',
+    image: 'https://dl.airtable.com/.attachments/sample-image-9.jpg',
+    price: 49.95,
+    desc: `I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian.`,
+  },
+  {
+    id: 10,
+    name: 'almond milk',
+    image: 'https://dl.airtable.com/.attachments/sample-image-10.jpg',
+    price: 4.99,
+    desc: `I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian.`,
+  },
+  {
+    id: 11,
+    name: 'aloe vera gel',
+    image: 'https://dl.airtable.com/.attachments/sample-image-11.jpg',
+    price: 7.99,
+    desc: `I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian.`,
+  },
+  {
+    id: 12,
+    name: 'alphabet blocks',
+    image: 'https://dl.airtable.com/.attachments/sample-image-12.jpg',
+    price: 14.99,
+    desc: `I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian.`,
+  }
 ]
 const people = [
   { id: 1, name: 'john' },
