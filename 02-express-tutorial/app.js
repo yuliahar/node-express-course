@@ -1,12 +1,12 @@
-const { products } = require("./data");
+const { products, people } = require("./data");
 const express = require('express');
+const logger = require('./logger');
 
 const app = express();
 
 // setup static and middleware
-app.use(express.static("./public"));
+app.use(logger);
 
-// routes
 app.get('/api/v1/test', (req, res) => {
   res.json({ message: "It worked!" });
 });
@@ -83,6 +83,10 @@ app.get('/api/v1/query', (req, res) => {
   }
 
   res.json(sortedProducts);
+});
+
+app.get('/api/v1/people', (req, res) => {
+  res.json({ success: true, data: people });
 });
 
 app.all('*', (req, res) => {
