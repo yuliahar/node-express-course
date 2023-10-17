@@ -1,14 +1,17 @@
 const { products, people } = require("./data");
 const express = require('express');
 const logger = require('./logger');
+const peopleRouter = require('./routes/people');
 
 const app = express();
 
+// static assets
+app.use(express.static('./methods-public'))
+// parse form data
 app.use(express.urlencoded({ extended: false }))
+// parse json
 app.use(express.json())
 
-// setup static and middleware
-app.use(express.static('./methods-public'))
 app.use(logger);
 
 app.get('/api/v1/test', (req, res) => {
@@ -90,22 +93,7 @@ app.get('/api/v1/query', (req, res) => {
   res.json(sortedProducts);
 });
 
-// PEOPLE API
-app.get('/api/v1/people', (req, res) => {
-  res.json({ success: true, data: people });
-});
-
-app.post('/api/v1/people', (req, res) => {
-  const { name } = req.body;
-
-  if (name) {
-    people.push({ id: people.length, name: req.body.name });
-    res.status(201).json({ success: true, name: req.body.name });
-  } else {
-    res.status(400).json({ success: false, message: 'Please provide a name' });
-  }
-});
-
+app.use('/api/v1/people', peopleRouter);
 
 app.all('*', (req, res) => {
   res.status(404).send('<h1>Page not found</h1>');

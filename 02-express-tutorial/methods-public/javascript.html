@@ -66,6 +66,7 @@
         const h5 = document.createElement('h5')
         h5.textContent = data.person
         result.appendChild(h5)
+        fetchPeople()
       } catch (error) {
         // console.log(error.response)
         formAlert.textContent = error.response.data.msg
