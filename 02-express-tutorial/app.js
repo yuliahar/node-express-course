@@ -4,13 +4,18 @@ const logger = require('./logger');
 
 const app = express();
 
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
 // setup static and middleware
+app.use(express.static('./methods-public'))
 app.use(logger);
 
 app.get('/api/v1/test', (req, res) => {
   res.json({ message: "It worked!" });
 });
 
+// PRODUCTS API
 // http://localhost:3000/api/v1/products
 app.get('/api/v1/products', (req, res) => {
   res.json(products);
@@ -85,9 +90,22 @@ app.get('/api/v1/query', (req, res) => {
   res.json(sortedProducts);
 });
 
+// PEOPLE API
 app.get('/api/v1/people', (req, res) => {
   res.json({ success: true, data: people });
 });
+
+app.post('/api/v1/people', (req, res) => {
+  const { name } = req.body;
+
+  if (name) {
+    people.push({ id: people.length, name: req.body.name });
+    res.status(201).json({ success: true, name: req.body.name });
+  } else {
+    res.status(400).json({ success: false, message: 'Please provide a name' });
+  }
+});
+
 
 app.all('*', (req, res) => {
   res.status(404).send('<h1>Page not found</h1>');
