@@ -31,7 +31,7 @@ const stuff = [1, 2, 'fish', { id: 3 }];
 const object = {
   // in OO, we group data and behavior
   data: 1,
-  behavior: function() {
+  behavior: function () {
     // "this" is a reference to the object we are inside of right now
     this.data++;
     console.log('OOP demo:', this.data);
@@ -61,69 +61,82 @@ object.behavior()
 //   - The callback should return a boolean. If the return value is true, the
 //     element becomes a member of the new array. If the return value is false,
 //     the element is filtered (removed).
-   const integers = [1, 2, 3, 4, 5];
-   // evenNumbers will be interger % 2 for each integer
-   const evenNumbers = integers.filter((integer) => {
-     return integer % 2 === 0
-   })
+const integers = [1, 2, 3, 4, 5];
+// evenNumbers will be interger % 2 for each integer
+const evenNumbers = integers.filter((integer) => {
+  return integer % 2 === 0
+})
 
 // - Array.prototype.map
 //   - The callback recieves each item of the array. The return value is pushed
 //     into a new array
-   const numbers = [1, 2, 3];
-   const doubles = numbers.map((i) => i * 2);
+const numbers = [1, 2, 3];
+const doubles = numbers.map((i) => i * 2);
 
 // - Array.prototype.forEach
 //   - `forEach` is like a "for" loop. It calls the callback for every item in
 //     the array
-   evenNumbers.forEach((thingy) => console.log('even', thingy));
-   doubles.forEach((d) => console.log('doubled!', d));
+evenNumbers.forEach((thingy) => console.log('even', thingy));
+doubles.forEach((d) => console.log('doubled!', d));
 
 // - Array.prototype.reduce
 //   - A bit tricky
 //   - Can transform an array into an atribrary result
-  const lastNames = ['Smith', 'Toure', 'Hernandez']
-  const initialValue = 0;
-  const totalLettersInNames = lastNames.reduce((runningTotal, currentName) => {
-    return runningTotal + currentName.length;
-  }, initialValue)
-  console.log({totalLettersInNames});
+const lastNames = ['Smith', 'Toure', 'Hernandez']
+const initialValue = 0;
+const totalLettersInNames = lastNames.reduce((runningTotal, currentName) => {
+  return runningTotal + currentName.length;
+}, initialValue)
+console.log({ totalLettersInNames });
 
-  // The first argument is always the return value that we're building up.
-  // I called it, "runningTotal" before. The default name is "accumulator."
-  // Often, Array.prototype.reduce is used to build a mapping from an array,
-  // like this:
-  const people = [{id: 1, name: 'tim'}, {id: 2, name: 'jane'}];
-  const peopleIdMap = people.reduce((map, person) => {
-    map[person.id] = person;
-    return map;
-  }, {} /* second arg is always the initial value! Here, it's an empty object */);
+// The first argument is always the return value that we're building up.
+// I called it, "runningTotal" before. The default name is "accumulator."
+// Often, Array.prototype.reduce is used to build a mapping from an array,
+// like this:
+const people = [{ id: 1, name: 'tim' }, { id: 2, name: 'jane' }];
+const peopleIdMap = people.reduce((map, person) => {
+  map[person.id] = person;
+  return map;
+}, {} /* second arg is always the initial value! Here, it's an empty object */);
 
-  // Now we can lookup people by id!
-  console.log({lookedUpPerson1: peopleIdMap[1]})
-  console.log({lookedUpPerson2: peopleIdMap[2]});
+// Now we can lookup people by id!
+console.log({ lookedUpPerson1: peopleIdMap[1] })
+console.log({ lookedUpPerson2: peopleIdMap[2] });
 
-  // Sometimes, you'll see this fancy syntax used with reduce, especially when
-  // building mappings. Beware, though, there's a lot of unnecessary runtime
-  // overhead here, because we create a new object here every time instead of
-  // re-using the old one!! And it's only a few characters shorter than the
-  // more performant solution above.
-  const peopleNameMap = people.reduce((map, person) => ({
-    ...map,
-    [person.name]: person
-  }), {});
+// Sometimes, you'll see this fancy syntax used with reduce, especially when
+// building mappings. Beware, though, there's a lot of unnecessary runtime
+// overhead here, because we create a new object here every time instead of
+// re-using the old one!! And it's only a few characters shorter than the
+// more performant solution above.
+const peopleNameMap = people.reduce((map, person) => ({
+  ...map,
+  [person.name]: person
+}), {});
 
-  // Now we can lookup people by name!
-  console.log({lookupTim: peopleNameMap['tim']})
-  console.log({lookupJane: peopleNameMap['jane']});
+// Now we can lookup people by name!
+console.log({ lookupTim: peopleNameMap['tim'] })
+console.log({ lookupJane: peopleNameMap['jane'] });
 
 /////////////////////////// CHALLENGES ////////////////////////////////////////
 
 // Each challenge will be related to this array of names. It will pose a
 // problem related to these names, and then implement the solution. The
 // challenges are:
-//
+const names = [
+  'Dimitry SantiAgo',
+  'Carlos d. Perez',
+  'tam  person',
+  'Mariana Gomez',
+  'Amy You'
+];
 // - Create a new array with only each person's last name
+//   - expected output is ['Santiago', 'Perez', 'person', ...]
+const personLastNames = names.map((name) => {
+  const nameArr = name.split(' ');
+  const lastName = nameArr[nameArr.length - 1];
+  return lastName;
+});
+console.log({ personLastNames });
 // - Filter names that don't match the format "<first> <last>"
 //   - Should remove Tam because she has a double-space
 //   - Should remove Carlow because he has a middle-name
@@ -133,26 +146,63 @@ object.behavior()
 //     - "Timmy-Turner"
 //     - "Billy\nBob"
 //     - etc.
+const testNames = [
+  'Dimitry SantiAgo',
+  'Carlos d. Perez',
+  'tam  person',
+  'Mariana Gomez',
+  'Amy You',
+  "Timothy      Cook",
+  "Nick_Masters",
+  "Timmy-Turner",
+  "Billy\nBob"
+];
+const correctNames = testNames.filter((name) => {
+  return name.match(/^\w+ \w+$/s);
+});
+console.log({ correctNames });
 // - Create a new array where everyone's name is converted to "Title Case"
 //   - The first character of each word should be uppercase
 //   - All other characters in the word should be lowercase
 //   - expected output is ['Dimitry Santiago', 'Carlos D. Perez', 'Tam Person', ...]
+const convertedNames = names.map((name) => {
+  const words = name.split(" ").filter((word) => !!word);
+  const formattedWords = words.map((word) =>
+    word.charAt(0).toUpperCase() + word.substring(1)
+  );
+  const result = formattedWords.join(" ");
+  return result;
+})
+console.log({ convertedNames });
 // - Last Challenge:
 //     Remove names with the wrong format
 //     AND change it to "Title Case"
 //     AND remove people whose last name ends with z
 //     AND write a message asking them to sign up
-//
+const isCorrectName = (name) => {
+  return /^\w+ \w+$/s.test(name);
+};
+
+const formatName = (name) => {
+  return name
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase())
+    .join(' ');
+};
+
+const lastNameEndsWithZ = (name) => {
+  const lastName = name.split(' ').pop();
+  return lastName.endsWith('z') || lastName.endsWith('Z');
+};
+
+let peopleToSignUp = names
+  .filter(isCorrectName)
+  .map(formatName)
+  .filter((name) => !lastNameEndsWithZ(name));
+
+peopleToSignUp.forEach((name) => console.log(`${name} please sign up`));
 // For an extra assignment, you may implement these yourself! Include your
 // changes to this file with your MR for week 3.
-
-const names = [
-  'Dimitry SantiAgo',
-  'Carlos d. Perez',
-  'tam  person',
-  'Mariana Gomez',
-  'Amy You'
-];
 
 ///////////////////////////////////////////////////////////////////////////////
 //// put your answers above if you wish to do the challenges on your own //////
@@ -237,7 +287,7 @@ const transformWordIntoTitle = (characterInWord, indexOfCharacter) => {
   if (indexOfCharacter === 0) {
     return characterInWord.toUpperCase();
   } // we have returned!! The rest of the code will ONLY run for characters
-    // after the first one
+  // after the first one
 
   // We could skip `.toLowerCase`, but if a letter in the middle of the word
   // is uPpErcAse, it'll look nicer if we transform it into lowercase
